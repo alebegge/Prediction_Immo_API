@@ -17,7 +17,7 @@ def predicted():
     if request.method == 'POST':
         data_prep = preprocess(input_json["data"])
         if data_prep:
-            return predict(data_prep)
+            return str(predict(data_prep))
         else:
             error = 'Invalid data, please refer to the documentation.'
             return error

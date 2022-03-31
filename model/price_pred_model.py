@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np 
-import os 
-import re
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import r2_score
@@ -11,12 +9,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.datasets import make_regression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
-from scipy import stats
-import statsmodels
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
-import statsmodels.stats.api as sms
-from statsmodels.compat import lzip
 import matplotlib.pyplot as plt
 
 df_model = pd.read_csv('model\db_model.csv')
@@ -42,7 +34,7 @@ features = [
     "Furnished",
     "Number of facades",
     "Surface terrace",
-    "Surface garden"
+    "Surface garden",
 ]
 shaped_df = df_model[features]
 
@@ -55,4 +47,8 @@ X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_s
 polyreg=make_pipeline(PolynomialFeatures(degree),LinearRegression(),)
 polyreg.fit(X,y)
 y_pred = polyreg.predict(X_test)
-polyreg.score(X_test, y_test)
+# polyreg.score(X_test, y_test)
+
+def price_pred_poly_3deg(X_test):
+    price_pred = polyreg.predict(X_test)
+    return price_pred
